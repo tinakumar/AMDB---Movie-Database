@@ -1,0 +1,32 @@
+<h1>Editing User #<%= @user.id %></h1>
+
+<% if @user.errors.any? %>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_tag(user_url(@user), method: 'put') do %>
+
+  <div>
+    <%= label_tag :username %><br />
+    <%= text_field_tag :username, @user.username %>
+  </div>
+
+  <div>
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+
+  <div>
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password_confirmation %>
+  </div>
+
+  <div>
+    <%= submit_tag "Update User" %>
+  </div>
+
+<% end %>

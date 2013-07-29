@@ -1,0 +1,41 @@
+<h1>Movies</h1>
+
+<p><%= link_to 'Add a New Movie', new_movie_url, class: 'btn' %></p>
+
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Year</th>
+      <th>Director</th>
+      <th>Votes</th>
+      <th>Number of Votes</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% @movies.each do |movie| %>
+    <tr>
+      <td><%= movie.title %></td>
+      <td><%= movie.year %></td>
+      <td><%= movie.director.try(:name) %></td>
+      <td><%= movie.number_of_votes %></td>
+      <td>
+        <%= form_tag votes_url, method: 'post' do %>
+          <%= hidden_field_tag :user_id, session[:user_id] %>
+          <%= hidden_field_tag :movie_id, movie.id %>
+          <%= button_tag "+1", class: 'btn btn-success' %>
+        <% end %>
+       </td>
+
+       <td><%= link_to 'Show', movie_url(movie), class: 'btn btn-primary' %></td>
+       <td><%= link_to 'Edit', edit_movie_url(movie), class: 'btn btn-warning' %></td>
+       <td><%= link_to 'Destroy', movie_url(movie), class: 'btn btn-danger', method: 'delete', data: { confirm: "Do you really want to delete this movie?"} %></td>
+
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

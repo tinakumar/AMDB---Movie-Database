@@ -1,0 +1,25 @@
+<h1>Editing Vote #<%= @vote.id %></h1>
+
+<% if @vote.errors.any? %>
+  <ul>
+    <% @vote.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_tag(vote_url(@vote), method: 'put') do %>
+
+  <%= hidden_field_tag :user_id, session[:user_id] %>
+
+  <div>
+    <%= label_tag :movie_id %><br />
+    <%= select_tag :movie_id, options_from_collection_for_select(Movie.all, :id, :title) %>
+  </div>
+
+
+  <div>
+    <%= submit_tag "Update Vote" %>
+  </div>
+
+<% end %>

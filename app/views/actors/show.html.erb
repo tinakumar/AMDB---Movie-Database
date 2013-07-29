@@ -1,0 +1,20 @@
+<h1>Actor #<%= @actor.id %></h1>
+
+<p>
+  <b>Name:</b>
+  <%= @actor.name %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @actor.dob %>
+</p>
+
+<p>
+  <b>Filmography:</b>
+  <ul>
+    <% @actor.movies.each do |movie| %>
+      <li><%= link_to movie.title, movie %></li>
+    <% end %>
+  </ul>
+</p>
